@@ -1,43 +1,67 @@
-import { Award } from "lucide-react"
+"use client"
+
+import { motion } from "framer-motion"
+import { GraduationCap, BookOpen, Calendar } from "lucide-react"
 
 export default function Education() {
   return (
-    <section id="education" className="section-padding bg-background">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 gradient-text">Education</h2>
+    <section id="education" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">Education</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mb-6" />
+        </motion.div>
 
-        <div className="space-y-8">
-          {/* Main Education */}
-          <div className="border-l-4 border-accent pl-6 py-4">
-            <h3 className="text-2xl font-bold mb-2">BSc. Computer Science and Technology</h3>
-            <p className="text-lg text-accent font-semibold mb-1">Uva Wellassa University of Sri Lanka</p>
-            <p className="text-muted-foreground">Currently Enrolled</p>
-          </div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto"
+        >
+          <div className="group relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl" />
 
-          {/* Achievements */}
-          <div className="pt-8">
-            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <Award className="w-6 h-6 text-accent" />
-              Achievements & Certifications
-            </h3>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              {[
-                "Top 10 Hackathon Participant",
-                "Full Stack Development Certification",
-                "Web Development Excellence Award",
-                "GitHub Contributor Badge",
-              ].map((achievement) => (
-                <div
-                  key={achievement}
-                  className="p-4 rounded-lg bg-muted border border-border hover:border-accent transition-colors"
-                >
-                  <p className="font-medium">{achievement}</p>
+            <div className="relative bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-300">
+              <div className="flex gap-6">
+                {/* Icon */}
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-xl">
+                    <GraduationCap size={32} className="text-primary-foreground" />
+                  </div>
                 </div>
-              ))}
+
+                {/* Content */}
+                <div className="flex-grow">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
+                    Bachelor of Science (Hons) in Computer Science and Technology
+                  </h3>
+                  <p className="text-lg font-semibold text-primary mb-4">Uva Wellassa University of Sri Lanka</p>
+
+                  <div className="flex flex-col gap-3 text-foreground/75">
+                    <div className="flex items-center gap-3">
+                      <Calendar size={18} className="text-accent" />
+                      <span>Expected Graduation: 2026</span>
+                    </div>
+                    <div className="flex items-start gap-3 mt-2">
+                      <BookOpen size={18} className="text-accent flex-shrink-0 mt-1" />
+                      <p>
+                        Focused on full-stack web development, emerging technologies, and practical software engineering
+                        with emphasis on innovation and community impact.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

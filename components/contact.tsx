@@ -3,8 +3,14 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { Mail, Linkedin, Github, Zap, Send } from "lucide-react"
+
+const socialLinks = [
+  { icon: Github, label: "GitHub", href: "#", color: "hover:bg-gray-600" },
+  { icon: Linkedin, label: "LinkedIn", href: "#", color: "hover:bg-blue-600" },
+  { icon: Mail, label: "Email", href: "mailto:asiri@example.com", color: "hover:bg-red-600" },
+]
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,135 +19,177 @@ export default function Contact() {
     subject: "",
     message: "",
   })
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission
     console.log(formData)
-    setFormData({ name: "", email: "", subject: "", message: "" })
+    setIsSubmitted(true)
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setFormData({ name: "", email: "", subject: "", message: "" })
+    }, 3000)
   }
 
   return (
-    <section id="contact" className="section-padding bg-muted">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center gradient-text">Get In Touch</h2>
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-card/30">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">Get In Touch</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mb-6" />
+          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
+            Have a project in mind? Let's connect and create something amazing together.
+          </p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <p className="text-lg text-muted-foreground mb-8">
-              Have a project in mind or just want to chat? Feel free to reach out!
-            </p>
-
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <Mail className="w-6 h-6 text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold mb-1">Email</h3>
-                  <a
-                    href="mailto:asiri@example.com"
-                    className="text-muted-foreground hover:text-accent transition-colors"
-                  >
-                    asiri@example.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <Phone className="w-6 h-6 text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold mb-1">Phone</h3>
-                  <a href="tel:+94701234567" className="text-muted-foreground hover:text-accent transition-colors">
-                    +94 70 123 4567
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold mb-1">Location</h3>
-                  <p className="text-muted-foreground">Badulla, Sri Lanka</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="pt-6">
-              <h3 className="font-bold mb-4">Follow Me</h3>
-              <div className="flex gap-4">
-                {[
-                  { name: "GitHub", url: "#" },
-                  { name: "LinkedIn", url: "#" },
-                  { name: "Twitter", url: "#" },
-                ].map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    className="px-4 py-2 rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors font-medium"
-                  >
-                    {link.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
+        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="John Doe"
+                  required
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="john@example.com"
+                  required
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Project Inquiry"
+                  required
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell me about your project..."
+                  rows={5}
+                  required
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
+                />
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <Send size={18} />
+                {isSubmitted ? "Message Sent!" : "Send Message"}
+              </motion.button>
+            </form>
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col justify-center space-y-8"
+          >
             <div>
-              <label className="block font-medium mb-2">Name</label>
-              <input
-                type="text"
-                placeholder="Your name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-border focus:border-accent focus:outline-none transition-colors"
-                required
-              />
+              <h3 className="text-2xl font-bold text-foreground mb-4">Let's Connect</h3>
+              <p className="text-foreground/70 leading-relaxed">
+                I'm always interested in hearing about new projects and opportunities. Whether you have a question or
+                just want to say hi, feel free to reach out!
+              </p>
             </div>
 
-            <div>
-              <label className="block font-medium mb-2">Email</label>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-border focus:border-accent focus:outline-none transition-colors"
-                required
-              />
+            <div className="space-y-4">
+              <p className="text-sm text-foreground/60 font-medium uppercase tracking-wider">Connect via</p>
+              <div className="flex gap-4">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon
+                  return (
+                    <motion.a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`flex items-center justify-center w-14 h-14 bg-primary/10 text-primary rounded-lg border border-primary/30 ${social.color} transition-all duration-300`}
+                      aria-label={social.label}
+                    >
+                      <Icon size={24} />
+                    </motion.a>
+                  )
+                })}
+              </div>
             </div>
 
-            <div>
-              <label className="block font-medium mb-2">Subject</label>
-              <input
-                type="text"
-                placeholder="Subject"
-                value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-border focus:border-accent focus:outline-none transition-colors"
-                required
-              />
+            <div className="bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/30 rounded-xl p-6">
+              <div className="flex items-start gap-3">
+                <Zap size={24} className="text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <p className="font-semibold text-foreground mb-1">Quick Response</p>
+                  <p className="text-sm text-foreground/70">
+                    I typically respond to inquiries within 24-48 hours. Looking forward to connecting!
+                  </p>
+                </div>
+              </div>
             </div>
-
-            <div>
-              <label className="block font-medium mb-2">Message</label>
-              <textarea
-                placeholder="Your message..."
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={5}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-border focus:border-accent focus:outline-none transition-colors resize-none"
-                required
-              />
-            </div>
-
-            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 gap-2">
-              <Send className="w-4 h-4" />
-              Send Message
-            </Button>
-          </form>
+          </motion.div>
         </div>
       </div>
     </section>
