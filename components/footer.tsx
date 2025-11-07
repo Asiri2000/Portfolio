@@ -7,9 +7,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const footerLinks = [
-    { label: "GitHub", icon: Github, href: "#" },
-    { label: "LinkedIn", icon: Linkedin, href: "#" },
-    { label: "Email", icon: Mail, href: "mailto:asiri@example.com" },
+    { label: "GitHub", icon: Github, href: "https://github.com/Asiri2000" },
+    { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/asiri-weerasinghe-674570349" },
+    { label: "Email", icon: Mail, href: "mailto:va.weerasinghe@gmail.com" },
   ]
 
   return (

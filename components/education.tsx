@@ -52,7 +52,7 @@ export default function Education() {
                     <div className="flex items-start gap-3 mt-2">
                       <BookOpen size={18} className="text-accent flex-shrink-0 mt-1" />
                       <p>
-                        Focused on full-stack web development, emerging technologies, and practical software engineering
+                        Focused on full-stack web development, emerging technologies, machine learning, and practical software engineering
                         with emphasis on innovation and community impact.
                       </p>
                     </div>

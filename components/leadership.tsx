@@ -9,7 +9,7 @@ const leadershipRoles = [
     role: "Chair, IEEE Student Branch",
     organization: "Uva Wellassa University",
     description:
-      "Leading a team of tech-driven students to organize impactful community-based innovation projects and mentor emerging tech leaders.",
+      "Driving the vision of the IEEE Student Branch by fostering innovation, collaboration, and professional growth among undergraduates. Leading initiatives that empower students through technology, research, and community impact while mentoring future leaders in tech and engineering.",
     icon: Award,
   },
   {
@@ -17,23 +17,26 @@ const leadershipRoles = [
     role: "Vice Chair, IEEE Student Branch",
     organization: "Uva Wellassa University",
     description:
-      "Contributed to strategic initiatives and supported leadership in organizing technical seminars and workshops for students.",
+      "Collaborated closely with the executive team to strengthen the branch’s technical and community presence. Played a key role in planning and executing hands-on workshops, tech talks, and innovation programs that inspired student engagement and leadership in emerging technologies.",
+    icon: Award,
+  },
+ 
+{
+    year: "2025/2026",
+    role: "Vice Captain, Tennis Team",
+    organization: "Uva Wellassa University",
+    description:
+      "Played a key role in leading and motivating the university tennis team, supporting strategic planning, training sessions, and fostering teamwork to achieve competitive excellence.",
     icon: Users,
   },
+
+
   {
-    year: "2024/2025",
-    role: "Chair, Project Sihinayata Peraman",
-    organization: "IEEE Sri Lanka Section SIGHT",
-    description:
-      "Championed a regional sustainability project bringing technology-driven solutions to communities across Sri Lanka.",
-    icon: Zap,
-  },
-  {
-    year: "2024/2025",
+    year: "2023",
     role: "Chair, Project Pillam",
     organization: "Rotaract Club of Uva Wellassa University",
     description:
-      "Organized community service initiatives in Kandy District, combining tech skills with social responsibility.",
+      "Organized community service project focused on education and digital literacy for underprivileged school children.",
     icon: Award,
   },
 ]
